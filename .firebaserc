@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "rec-pitch": {
+      "hosting": {
+        "rec-pitch": [
+          "rec-pitch"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "rec-pitch"
+  }
+}
