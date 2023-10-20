@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { Analytics } from '@angular/fire/analytics';
 import { Auth, User, onAuthStateChanged } from '@angular/fire/auth';
-import { Firestore } from '@angular/fire/firestore';
+import { CollectionReference, Firestore, collection, collectionData } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-home',
@@ -11,6 +11,7 @@ import { Firestore } from '@angular/fire/firestore';
 export class HomeComponent {
   private firestore: Firestore = inject(Firestore);
   private analytics: Analytics = inject(Analytics);
+  startupsCollection: CollectionReference;
   isLoading = true;
   private auth: Auth = inject(Auth);
   user: User | null = null;
@@ -23,6 +24,10 @@ export class HomeComponent {
         this.user = user;
       }
     });
-    this.isLoading = false;
+    this.startupsCollection = collection(this.firestore, 'startups');
+    collectionData(this.startupsCollection).subscribe((startups) => {
+      this.startups = startups;
+      this.isLoading = false;
+    });
   }
 }

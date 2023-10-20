@@ -40,6 +40,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { StartupComponent } from './startup/startup.component';
+import { StartupsComponent } from './startups/startups.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +49,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     AuthFirebaseuiAvatarComponent,
     LoginComponent,
     HomeComponent,
+    StartupComponent,
+    StartupsComponent,
   ],
   imports: [
     BrowserModule,
