@@ -1,7 +1,6 @@
 import { Component, inject } from '@angular/core';
-import { Firestore, onSnapshot, doc, DocumentSnapshot, updateDoc, deleteDoc } from '@angular/fire/firestore';
+import { DocumentReference, DocumentData, Firestore, onSnapshot, doc, DocumentSnapshot, updateDoc, deleteDoc } from '@angular/fire/firestore';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DocumentReference, DocumentData } from 'rxfire/firestore/interfaces';
 
 @Component({
   selector: 'app-startup',

@@ -1,7 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { Analytics } from '@angular/fire/analytics';
 import { Auth, User, onAuthStateChanged } from '@angular/fire/auth';
-import { CollectionReference, Firestore, collection, collectionData } from '@angular/fire/firestore';
+import { CollectionReference, Firestore, collection, collectionData, addDoc, DocumentReference } from '@angular/fire/firestore';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -18,6 +19,7 @@ export class HomeComponent {
   startups: any[] = [];
 
   constructor(
+    private router: Router,
   ) {
     onAuthStateChanged(this.auth, (user) => {
       if (user) {
@@ -25,9 +27,16 @@ export class HomeComponent {
       }
     });
     this.startupsCollection = collection(this.firestore, 'startups');
-    collectionData(this.startupsCollection).subscribe((startups) => {
+    collectionData(this.startupsCollection, { idField: 'id' }).subscribe((startups) => {
       this.startups = startups;
       this.isLoading = false;
     });
+  }
+
+  createStartup() {
+    addDoc(this.startupsCollection, { name: 'New Startup' })
+      .then((newStartupReference: DocumentReference) => {
+        this.router.navigate([`startup/${newStartupReference.id}`]);
+      });
   }
 }

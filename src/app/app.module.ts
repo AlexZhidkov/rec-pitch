@@ -42,6 +42,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { StartupComponent } from './startup/startup.component';
 import { StartupsComponent } from './startups/startups.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { StartupsComponent } from './startups/startups.component';
     HomeComponent,
     StartupComponent,
     StartupsComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

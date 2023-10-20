@@ -1,0 +1,70 @@
+<mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+<mat-card>
+    <mat-card-header>
+        <mat-card-title>
+            <span *ngIf="isLoading">Loading ...</span>
+            <span *ngIf="!isLoading">{{profile.displayName}}</span>
+        </mat-card-title>
+    </mat-card-header>
+    <mat-card-content *ngIf="!isLoading">
+        <form>
+            <mat-form-field>
+                <mat-label>Preferred Name</mat-label>
+                <input matInput name="name" [ngModel]="profile.name" (ngModelChange)="updateProfile({name: $event})">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Surname</mat-label>
+                <input matInput name="surname" [ngModel]="profile.surname"
+                    (ngModelChange)="updateProfile({surname: $event})">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Mobile Number</mat-label>
+                <input matInput name="mobile" [ngModel]="profile.mobile"
+                    (ngModelChange)="updateProfile({mobile: $event})">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>About You</mat-label>
+                <textarea matInput rows="10" name="about" [ngModel]="profile.about"
+                    (ngModelChange)="updateProfile({about: $event})">
+            </textarea>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Location</mat-label>
+                <input matInput name="location" [ngModel]="profile.location"
+                    (ngModelChange)="updateProfile({location: $event})">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Education</mat-label>
+                <input type="text" name="education" placeholder="Pick one" aria-label="Education" matInput
+                    [formControl]="educationControl" [matAutocomplete]="autoEducation" [ngModel]="profile.education"
+                    (ngModelChange)="updateProfile({education: $event})">
+                <mat-autocomplete #autoEducation="matAutocomplete">
+                    <mat-option *ngFor="let education of educationOptions" [value]="education">
+                        {{education}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Occupation</mat-label>
+                <mat-chip-grid #chipGrid aria-label="Occupation">
+                    <mat-chip-row *ngFor="let occupation of occupations" (removed)="remove(occupation)">
+                        {{occupation}}
+                        <button matChipRemove [attr.aria-label]="'remove ' + occupation">
+                            <mat-icon>cancel</mat-icon>
+                        </button>
+                    </mat-chip-row>
+                </mat-chip-grid>
+                <input placeholder="Add Occupation..." #occupationInput name="occupation"
+                    [formControl]="occupationControl" [matChipInputFor]="chipGrid" [matAutocomplete]="autoOccupation"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes" (matChipInputTokenEnd)="add($event)" />
+                <mat-autocomplete #autoOccupation="matAutocomplete" (optionSelected)="selected($event)">
+                    <mat-option *ngFor="let occupation of filteredOccupations | async" [value]="occupation">
+                        {{occupation}}
+                    </mat-option>
+                </mat-autocomplete>
+            </mat-form-field>
+
+        </form>
+    </mat-card-content>
+</mat-card>
