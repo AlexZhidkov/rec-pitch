@@ -8,10 +8,20 @@
     </mat-card-header>
     <mat-card-content>
         <mat-form-field>
-            <mat-label>Title</mat-label>
-            <input matInput name="activityTitle" [ngModel]="startup?.name"
-                (ngModelChange)="updateStartup({name: $event})" data-cy="activityTitle">
-            <mat-icon matSuffix>toc</mat-icon>
+            <mat-label>Name</mat-label>
+            <input matInput name="name" [ngModel]="startup?.name" (ngModelChange)="updateStartup({name: $event})"
+                data-cy="name">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Motto</mat-label>
+            <input matInput name="motto" [ngModel]="startup?.motto" (ngModelChange)="updateStartup({motto: $event})"
+                data-cy="motto">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Product</mat-label>
+            <textarea matInput rows="10" name="product" [ngModel]="startup?.product"
+                (ngModelChange)="updateStartup({product: $event})">
+        </textarea>
         </mat-form-field>
     </mat-card-content>
     <mat-card-actions>
